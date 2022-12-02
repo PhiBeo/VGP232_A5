@@ -54,7 +54,31 @@ namespace Assignment5
         /// <returns>True if you find the item, and false if it does not exist.</returns>
         bool TakeItem(string name, out Item found)
         {
-            throw new NotImplementedException();
+            if (availableSlots == maxSlots)
+            {
+                found = null;
+                return false;
+            }
+
+            foreach(var key in items.Keys)
+            {
+                if(key.Name == name)
+                {
+                    if(items[key] == 1)
+                    {
+                        items.Remove(key);
+                        found = key;
+                    }
+                    else
+                    {
+                        items[key]--;
+                        found = key;
+                    }
+                    return true;
+                }
+            }
+            found = null;
+            return false;
         }
 
         /// <summary>
@@ -67,7 +91,18 @@ namespace Assignment5
             // Add it in the items dictionary and increment it the number if it already exist
             // Reduce the slot once it's been added.
             // returns false if the inventory is full
-            throw new NotImplementedException();
+            if (availableSlots <= 0)
+                return false;
+
+            if(items.ContainsKey(item))
+            {
+                items[item]++;
+            }
+            else
+            {
+                items.Add(item, 1);
+            }
+            return true;
         }
 
         /// <summary>
@@ -77,7 +112,12 @@ namespace Assignment5
         List<Item> ListAllItems()
         {
             // use a foreach loop to iterate through the key value pairs and duplicate the item base on the quantity.
-            throw new NotImplementedException();
+            List<Item> inventory = new List<Item>();
+            foreach (var key in items.Keys)
+            {
+                inventory.Add(key);
+            }
+            return inventory;
         }
     }
 }
