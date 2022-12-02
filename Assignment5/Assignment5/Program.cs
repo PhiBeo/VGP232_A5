@@ -6,6 +6,8 @@ namespace Assignment5
     {
         static void Main(string[] args)
         {
+            //character
+
             Console.WriteLine("Welcome to the Adventure of Assignment 5!");
 
             Character hero = new Character("Bob", RaceCategory.Human, 100);
@@ -43,6 +45,32 @@ namespace Assignment5
             {
                 Console.WriteLine("{0} has died.", hero.Name);
             }
+
+            //Inventory
+
+            Inventory inventory = new Inventory(10);
+
+            Item sword = new Item("Sword", 1, ItemGroup.Equipment);
+            Item bow = new Item("Bow", 1, ItemGroup.Equipment);
+            Item healthPotion = new Item("Health Potion", 1, ItemGroup.Consumable);
+
+            inventory.AddItem(sword);
+            inventory.AddItem(bow);
+            inventory.AddItem(healthPotion);
+
+            Item item1;
+
+            string itemToTake = "mana";
+
+            if (inventory.TakeItem(itemToTake, out item1))
+            {
+                Console.WriteLine("Take out {0}", item1.Name);
+            }
+            else
+            {
+                Console.WriteLine("{0} does not exists", itemToTake);
+            }
+
         }
     }
 }
